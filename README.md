@@ -1,2 +1,2 @@
 # ugrecipes
-Ugandan Recipes - A sailsJs app using MongoDB 
+VueJS Frontend for the Doctor's Appointment Booking System
