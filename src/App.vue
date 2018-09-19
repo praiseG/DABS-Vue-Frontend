@@ -1,8 +1,8 @@
 <template>
   <div>
     <Header />
-    <Dashboard />
-    <!-- <Login /> -->
+    <!-- <Dashboard /> -->
+    <Login />
     <Footer />
   </div>
 </template>

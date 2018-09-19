@@ -6,9 +6,9 @@
             </b-col>
             <b-col cols="9">
                 <div class="mt-1">
-                    <!-- <appointments /> -->
+                    <appointments />
                     <!-- <Accounts /> -->
-                    <Patients />
+                    <!-- <Patients /> -->
                 </div>
                 
             </b-col>
