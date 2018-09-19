@@ -1,12 +1,33 @@
 <template>
     <div>
-        <ul>
-            <li v-for="account in accounts" v-if="account.role=='doctor'">{{account.name}} is a {{account.designation}}</li>
-        </ul>
+        <AccountForm />
+        <b-card class="mt-3">
+            <div class="table-responsive">
+                <table id="accounts-tbl" aria-busy="false" class="table b-table table-striped table-hover table-bordered table-sm b-table-fixed">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Designation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(acc, index) in accounts" :key="index">
+                            <td>{{index + 1}}</td>
+                            <td>{{acc.name}}</td>
+                            <td>{{acc.role}}</td>
+                            <td>{{acc.designation}}</td>
+                        </tr>      
+                    </tbody>
+                </table>
+            </div>
+        </b-card>
     </div>
 </template>
 
 <script>
+import AccountForm from './AccountForm';
     export default {
         data(){
             return {
@@ -18,6 +39,9 @@
                     {name: 'Cynthia Nantaba', role: 'doctor', designation: 'Paediatrician'}
                 ]
             }
+        },
+        components:{
+            AccountForm
         }
     }
 </script>

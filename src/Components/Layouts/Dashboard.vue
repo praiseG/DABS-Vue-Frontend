@@ -6,7 +6,9 @@
             </b-col>
             <b-col cols="9">
                 <div class="mt-1">
-                    <appointments />
+                    <!-- <appointments /> -->
+                    <!-- <Accounts /> -->
+                    <Patients />
                 </div>
                 
             </b-col>
@@ -17,13 +19,15 @@
 <script>
 import Navigation from './Navigation';
 import Accounts from '../Accounts/Accounts';
-import Appointments from '../Appointments/Appointments'
+import Appointments from '../Appointments/Appointments';
+import Patients from '../Patients/Patients';
 
 export default {
     components: {
         Navigation,
         Accounts,
         Appointments,
+        Patients
     },
     data(){
         return{
