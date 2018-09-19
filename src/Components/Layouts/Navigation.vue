@@ -1,23 +1,39 @@
 <template>
-    <aside>
-        <ul>
-            <li  v-for="link in links" v-bind:key=link><a :href="link">{{link}}</a></li>      
-        </ul>
-    </aside>
+    <b-nav vertical>
+        <!-- <b-nav-item></b-nav-item> -->
+        <b-nav-item  v-for="link in links" v-bind:key=link>
+            <b-link :href="link">{{link}}</b-link>
+        </b-nav-item>
+        <!-- <b-nav-item></b-nav-item> -->
+    </b-nav>
 </template>
 
 <script>
 export default {
     data(){
         return {
-            links: ['Appointments', 'Patients' , 'Accounts']
+            links: ['Appointments', 'Patients' , 'Doctors', 'Staff']
         }
     }
 }
 </script>
 
 <style scoped>
-aside{
+.nav{
     background: #222;
+}
+
+li{
+    border-bottom: #009EBA 0.1px solid;
+    margin: 0px;
+}
+
+li:hover{
+    background: #EFECE9;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #009EBA;
 }
 </style>

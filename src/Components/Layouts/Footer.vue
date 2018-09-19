@@ -1,5 +1,11 @@
 <template>
-    <footer> <p>Dabs &copy;{{year}} - System Built by Praise Mariah <a href="https://github.com/praiseG">(https://github.com/praiseG)</a></p> </footer>
+    <footer class="footer"> 
+        <div class="container">
+            <div class="content">
+                <p>Dabs &copy;{{year}} - by Praise Mariah <a href="https://github.com/praiseG">(https://github.com/praiseG)</a></p> 
+            </div>
+        </div>    
+    </footer>
 </template>
 
 <script>
@@ -15,14 +21,13 @@ export default {
 <style scoped>
     footer{
         background: #222;
-        padding: 2px;
-        text-align: center;
+        padding: 1rem 1.5rem 1rem;
         position: absolute;
+        right: 0;
         bottom: 0;
         left: 0;
-        right: 0;
-        /* height: 100px; */
         color: gainsboro;
+        text-align: center;
     }
 </style>
 

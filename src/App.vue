@@ -15,10 +15,10 @@ import Login from './Components/Authentication/Login';
 
 export default {
   components: {
-    'Header': Header,
-    'Footer': Footer,
-    'Dashboard': Dashboard,
-    'Login': Login,
+    Header,
+    Footer,
+    Dashboard,
+    Login,
   },
   data () {
     return {
@@ -56,6 +56,31 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: #009EBA;
+}
+
+.btn-dabs, .btn-dabs-light:hover{
+   background: #222;
+  color: #009EBA;
+  border-color: #009EBA;
+}
+
+.btn-dabs:hover, .btn-dabs-light{
+  text-decoration: none;
+  color: #009EBA;
+  background: #EFECE9;
+  border-color: #009EBA;
+}
+
+.mt-10{
+  margin-top: 6rem;
+}
+
+.card{
+  background: #EFECE9;
+}
+
+.table{
+  background: #fff;
 }
 </style>

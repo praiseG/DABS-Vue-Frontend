@@ -1,8 +1,16 @@
 <template>
-    <header>
-        <h1>{{ appName }}</h1>
-        <ul v-if="loggedIn"><li>User</li></ul>
-    </header>
+    <b-navbar toggleable="md" type="dark" variant="info"> 
+        <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
+        <b-navbar-brand href="/"><img  class="nav-logo" src="../../assets/logo.png" /><strong>  {{ appName }}</strong></b-navbar-brand>
+        <b-navbar-nav class="ml-auto">
+            <b-nav-item-dropdown right>
+                <template slot="button-content">
+                    <fa-icon icon="user-circle" /><em> pnanvuma@gmail.com</em>
+                </template>
+                <b-dropdown-item href="#">Logout</b-dropdown-item>
+            </b-nav-item-dropdown>
+        </b-navbar-nav>
+    </b-navbar>
 </template>
 
 <script>
@@ -19,22 +27,12 @@ export default {
 
 
 <style scoped>
-header{
+/* nav{
     background: #00C583;
-    /* padding: 8px; */
-    top: 0;
-    left: 0;
-    right: 0;
-    position: absolute;
-}
-h1{
-    color: #222;
-    /* text-align: left; */
-    float: left;
-    margin-left: 20px;
-}
-ul{
-    float: right;
-    margin: 30px auto; 
+    padding: 1.5rem 1.5rem 1.5rem;
+} */
+.nav-logo {
+    width: 30px;
+    height: 30px;
 }
 </style>

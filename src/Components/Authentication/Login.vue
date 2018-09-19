@@ -1,11 +1,25 @@
 <template>
-    <div class="row">
-        <form class="form" @submit="handleLogin">
-            <p><input type="email" ref="email" placeholder="Email"/></p>
-            <p><input type="password" ref="pwd" placeholder="Password"/></p>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+    <b-container class="mt-10">
+        <b-row>
+            <b-col></b-col>
+            <b-col cols="6">
+                 <b-card>
+                    <!-- <b-alert variant="danger" show>Login Error</b-alert><br /> -->
+                    <b-form class="form" @submit="handleLogin">
+                        <b-form-group label="Email Address">
+                            <b-form-input type="email" ref="email" placeholder="Enter Email"/>
+                        </b-form-group>
+                        <b-form-group label="Password">
+                            <b-form-input type="password" ref="pwd" placeholder="Enter Password"/>
+                        </b-form-group>
+                        <b-button type="submit" class="btn-dabs-light" >Submit</b-button>
+                    </b-form>
+                </b-card>
+            </b-col>
+            <b-col></b-col>
+        </b-row>
+    </b-container>
+   
 </template>
 
 <script>
@@ -23,10 +37,8 @@ export default {
 </script>
 
 <style scoped>
-button{
-    display: block;
-}
-.row{
-    margin: 200px 400px;
+.card{
+    background: #272727;
+    color: #009EBA;
 }
 </style>
