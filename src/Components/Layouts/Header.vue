@@ -5,7 +5,7 @@
         <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right>
                 <template slot="button-content">
-                    <fa-icon icon="user-circle" /><em> pnanvuma@gmail.com</em>
+                    <i class="fas fa-user-circle" /><em> pnanvuma@gmail.com</em>
                 </template>
                 <b-dropdown-item href="#">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
