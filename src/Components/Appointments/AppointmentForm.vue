@@ -1,48 +1,39 @@
 <template>
-    <div>
-        <b-btn v-b-toggle.collapse1 variant="primary" class="btn-dabs float-right"><fa-icon icon="plus" /> New Appointment</b-btn><br /><br />
-        <b-collapse id="collapse1" class="mt-2">
-            <b-card>
-                {{selected}}
-                <b-form>
-                    <b-row>
-                        <b-col cols="4">
-                            <b-form-select v-model="selected">
-                                <template slot="first">
-                                    <option :value=null disabled>Select Patient</option>
-                                </template>
-                                <option v-for="patient in patients" :key="patient.id" :value="patient.id">
-                                    {{patient.name}}
-                                </option>
-                            </b-form-select>
-                        </b-col>
-                        <b-col cols="4">
-                            <datePicker v-model="date" :config="doptions"></datePicker>
-                        </b-col>
-                        <b-col cols="4">
-                            <b-form-select v-model="selected">
-                                <template slot="first">
-                                    <option :value=null disabled>Assign Doctor</option>
-                                </template>
-                                <option v-for="patient in patients" :key="patient.id" :value="patient.id">
-                                    {{patient.name}}
-                                </option>
-                            </b-form-select>
-                        </b-col>
-                        <b-col cols="12" class="mt-2">
-                            <b-form-textarea placeholder="Description" :rows="3" />
-                        </b-col>
-                        <b-col cols="3" class="mt-3">
-                            <b-button class="btn-dabs" type="submit">Submit</b-button>
-                        </b-col>
-                    </b-row>
-                </b-form>
-            </b-card>
-        </b-collapse>
-    </div>
+    <FormHelper>
+        <span slot="add-label">Appointment</span>
+        <b-row slot="fields-row">
+            <b-col cols="4">
+                <b-form-select v-model="selected">
+                    <template slot="first">
+                        <option :value=null disabled>Select Patient</option>
+                    </template>
+                    <option v-for="patient in patients" :key="patient.id" :value="patient.id">
+                        {{patient.name}}
+                    </option>
+                </b-form-select>
+            </b-col>
+            <b-col cols="4">
+                <datePicker v-model="date" :config="doptions"></datePicker>
+            </b-col>
+            <b-col cols="4">
+                <b-form-select v-model="selected">
+                    <template slot="first">
+                        <option :value=null disabled>Assign Doctor</option>
+                    </template>
+                    <option v-for="patient in patients" :key="patient.id" :value="patient.id">
+                        {{patient.name}}
+                    </option>
+                </b-form-select>
+            </b-col>
+            <b-col cols="12" class="mt-2">
+                <b-form-textarea placeholder="Description" :rows="3" />
+            </b-col>
+        </b-row>
+    </FormHelper>
 </template>
 
 <script>
+import FormHelper from '../Layouts/FormHelper';
 import datePicker from 'vue-bootstrap-datetimepicker';
 import moment from 'moment';
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
@@ -82,7 +73,8 @@ export default {
         }
     },
     components: {
-        datePicker
+        datePicker,
+        FormHelper
     }
 }
 </script>

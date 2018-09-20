@@ -6,8 +6,8 @@
             </b-col>
             <b-col cols="9">
                 <div class="mt-1">
-                    <appointments />
-                    <!-- <Accounts /> -->
+                    <!-- <appointments /> -->
+                    <Accounts />
                     <!-- <Patients /> -->
                 </div>
                 
@@ -31,10 +31,20 @@ export default {
     },
     data(){
         return{
-            'content': 'This is the body'
+            all_ppointments: null,
+            all_accounts: null,
+            all_patients: null
         }
+    },
+    methods:{
+    },
+    created(){
+        getAppointments();
+    },
+    mounted(){
+        getAccounts();
+        getPatients();
     }
-
 }
 </script>
 <style scoped>

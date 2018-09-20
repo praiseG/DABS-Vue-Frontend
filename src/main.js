@@ -18,6 +18,8 @@ Vue.use(BootstrapVue);
 
 Vue.config.productionTip = false;
 
+export const eBus = new Vue();
+
 new Vue({
   el: '#app',
   render: h => h(App)

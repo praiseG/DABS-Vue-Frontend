@@ -7,10 +7,10 @@
                     <!-- <b-alert variant="danger" show>Login Error</b-alert><br /> -->
                     <b-form class="form" @submit="handleLogin">
                         <b-form-group label="Email Address">
-                            <b-form-input type="email" ref="email" placeholder="Enter Email"/>
+                            <b-form-input v-model.lazy="email" type="email" placeholder="Enter Email" requied/>
                         </b-form-group>
                         <b-form-group label="Password">
-                            <b-form-input type="password" ref="pwd" placeholder="Enter Password"/>
+                            <b-form-input v-model.lazy="password" type="password" placeholder="Enter Password" required/>
                         </b-form-group>
                         <b-button type="submit" class="btn-dabs-light" >Submit</b-button>
                     </b-form>
@@ -23,15 +23,22 @@
 </template>
 
 <script>
+import { eBus } from '../../main';
 export default {
     data(){
         return{
-            username: undefined,
-            password: undefined
+            email: null,
+            password: null
         }
     },
     methods: {
-        handleLogin(e){ e.preventDefaults(); return true; }
+        handleLogin(e){ 
+            e.preventDefault(); 
+            console.log("Handled logging");
+            // this.$emit('loggedInUser', 'gabby@dabs.com');
+            eBus.$emit('loggedInUser', this.email);
+
+        }
     }
 }
 </script>

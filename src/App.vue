@@ -1,8 +1,8 @@
 <template>
   <div>
     <Header />
-    <Dashboard />
-    <!-- <Login /> -->
+    <!-- <Dashboard /> -->
+    <Login />
     <Footer />
   </div>
 </template>
@@ -22,11 +22,11 @@ export default {
   },
   data () {
     return {
-      msg: 'My Vue.js App',
+      component: null,
     }
   },
   methods: {
-    greetings() { return "Am here Yahooo!!!"; }
+    
   }
 }
 </script>

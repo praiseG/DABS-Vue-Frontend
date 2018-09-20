@@ -1,6 +1,6 @@
 <template>
      <div>
-        <b-btn v-b-toggle.collapse1 variant="primary" class="btn-dabs float-right"><fa-icon icon="plus" /> New Patient</b-btn><br /><br />
+        <b-btn v-b-toggle.collapse1 variant="primary" class="btn-dabs float-right"><i class="fas fa-plus" /> New Patient</b-btn><br /><br />
         <b-collapse id="collapse1" class="mt-2">
             <b-card>
                 {{selected}}
@@ -17,7 +17,7 @@
                             </b-form-select>
                         </b-col>
                         <b-col cols="4">
-                            <datePicker v-model="date" :config="doptions"></datePicker>
+                            <b-form-input type="text" placeholder="Name" />
                         </b-col>
                         <b-col cols="4">
                             <b-form-select v-model="selected">
