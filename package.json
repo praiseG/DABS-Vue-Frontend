@@ -19,7 +19,9 @@
     "npm": "^6.4.1",
     "popper.js": "^1.14.4",
     "vue": "^2.5.11",
-    "vue-bootstrap-datetimepicker": "^5.0.1"
+    "vue-bootstrap-datetimepicker": "^5.0.1",
+    "vue-resource": "^1.5.1",
+    "vue-router": "^3.0.1"
   },
   "browserslist": [
     "> 1%",

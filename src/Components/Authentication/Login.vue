@@ -4,8 +4,8 @@
             <b-col></b-col>
             <b-col cols="6">
                  <b-card>
-                    <!-- <b-alert variant="danger" show>Login Error</b-alert><br /> -->
-                    <b-form class="form" @submit="handleLogin">
+                    <b-alert variant="danger" v-if="loginError" show>{{loginError}}</b-alert><br />
+                    <b-form class="form" @submit.prevent="handleLogin">
                         <b-form-group label="Email Address">
                             <b-form-input v-model.lazy="email" type="email" placeholder="Enter Email" requied/>
                         </b-form-group>
@@ -28,16 +28,34 @@ export default {
     data(){
         return{
             email: null,
-            password: null
+            password: null,
+            loginError: null
         }
     },
     methods: {
-        handleLogin(e){ 
-            e.preventDefault(); 
-            console.log("Handled logging");
-            // this.$emit('loggedInUser', 'gabby@dabs.com');
-            eBus.$emit('loggedInUser', this.email);
-
+        handleLogin(){ 
+            this.$http.post('auth/token/', {
+                "email": this.email,
+                "password": this.password
+            })
+            .then(resp => {
+                console.log(resp);
+                this.loginError = null;
+                eBus.$emit('loggedInUser', this.email);
+            },
+            error => {
+                console.log(error);
+                switch(error.status){
+                    case 400:
+                        this.loginError = error.body.non_field_errors[0];
+                        break;
+                    default:
+                        this.loginError = "Error Logging in: " + error.status + "-" + error.statusText;
+                        break
+                }   
+                
+            });
+            
         }
     }
 }

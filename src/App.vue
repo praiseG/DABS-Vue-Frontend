@@ -2,7 +2,8 @@
   <div>
     <Header />
     <!-- <Dashboard /> -->
-    <Login />
+    <!-- <Login /> -->
+    <router-view></router-view>
     <Footer />
   </div>
 </template>

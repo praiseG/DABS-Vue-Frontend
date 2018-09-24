@@ -6,9 +6,7 @@
             </b-col>
             <b-col cols="9">
                 <div class="mt-1">
-                    <!-- <appointments /> -->
-                    <Accounts />
-                    <!-- <Patients /> -->
+                    <router-view></router-view>
                 </div>
                 
             </b-col>
@@ -18,16 +16,10 @@
 
 <script>
 import Navigation from './Navigation';
-import Accounts from '../Accounts/Accounts';
-import Appointments from '../Appointments/Appointments';
-import Patients from '../Patients/Patients';
 
 export default {
     components: {
         Navigation,
-        Accounts,
-        Appointments,
-        Patients
     },
     data(){
         return{
@@ -37,13 +29,24 @@ export default {
         }
     },
     methods:{
+        // getAccounts(){
+        //     this.$http.get('accounts', {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6InByYWlzZUBkYWJzLmNvbSIsImV4cCI6MTUzNzU5MTM2OCwiZW1haWwiOiJwcmFpc2VAZGFicy5jb20ifQ.3NL6NeE8u35rbOJ801Ax55wc272p2l0rxiix2MrPgYY'}})
+        //     .then(
+        //         resp => {
+        //             console.log(resp);
+        //             this.all_accounts = resp.body;
+        //         }, 
+        //         error => {
+        //             console.log(error)
+        //     });
+        // }
     },
     created(){
-        getAppointments();
+        // getAppointments();
     },
     mounted(){
-        getAccounts();
-        getPatients();
+        // this.getAccounts();
+        // getPatients();
     }
 }
 </script>
