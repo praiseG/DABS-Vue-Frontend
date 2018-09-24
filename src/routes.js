@@ -17,7 +17,7 @@ export default [
         {path: 'patients', component: Patients},
     ],
     meta: {
-        requiresLoginn: true
+        requiresLogin: true
     }
     },
     {path: '/login', component: Login, meta: {requiresVisitor: true}},  

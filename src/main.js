@@ -31,12 +31,19 @@ router.beforeEach((to,from, next) => {
   if(!to.matched.length){
     next('/NotFound');
   } else if(to.matched.some(record => record.meta.requiresLogin)) {
-    if(!localStorage.getItem('token')){
+    if(localStorage.getItem('token') == null){
+      console.log('requires Login');
       next('/login');
+    }else{
+      next();
     }
-  }else if(to.matched.some(record => record.meta.requiresVisitor)) {
+  }
+  else if(to.matched.some(record => record.meta.requiresVisitor)) {
     if(localStorage.getItem('token')){
+      console.log('requires Visitor');
       next('/');
+    }else{
+      next();
     }
   }
   else{
