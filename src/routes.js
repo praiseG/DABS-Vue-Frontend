@@ -1,5 +1,6 @@
 import Login from './Components/Authentication/Login';
 import Logout from './Components/Authentication/Logout';
+import NotFound from './Components/Layouts/NotFound';
 import Dashboard from './Components/Layouts/Dashboard';
 import Appointments from './Components/Appointments/Appointments';
 import Accounts from './Components/Accounts/Accounts';
@@ -14,7 +15,12 @@ export default [
         {path: 'appointments/:id', component: AppointmentDetail},
         {path: 'staff', component: Accounts},
         {path: 'patients', component: Patients},
-    ]},
-    {path: '/login', component: Login},  
-    {path:'/logout',component: Logout}
+    ],
+    meta: {
+        requiresLoginn: true
+    }
+    },
+    {path: '/login', component: Login, meta: {requiresVisitor: true}},  
+    {path: '/logout', component: Logout},
+    {path:'/NotFound',component: NotFound}
 ]

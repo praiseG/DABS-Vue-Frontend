@@ -27,6 +27,25 @@ const router = new VueRouter({
   routes: Routes
 });
 
+router.beforeEach((to,from, next) => {
+  if(!to.matched.length){
+    next('/NotFound');
+  } else if(to.matched.some(record => record.meta.requiresLogin)) {
+    if(!localStorage.getItem('token')){
+      next('/login');
+    }
+  }else if(to.matched.some(record => record.meta.requiresVisitor)) {
+    if(localStorage.getItem('token')){
+      next('/');
+    }
+  }
+  else{
+    next();
+  }
+
+
+});
+
 Vue.http.options.root = 'http://localhost:8003/api/v1/';
 Vue.http.headers.common['content-type'] = 'application/json';
 

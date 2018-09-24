@@ -7,7 +7,7 @@
                 <template slot="button-content">
                     <i class="fas fa-user-circle" /><em> {{ username }}</em>
                 </template>
-                <b-dropdown-item href="#">Logout</b-dropdown-item>
+                <b-dropdown-item href="/logout">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
         </b-navbar-nav>
     </b-navbar>
@@ -27,6 +27,7 @@ export default {
         eBus.$on('loggedInUser', data => {
             this.username = data;
         })
+        // this.username = localStorage.getItem('username')
     }
 }
 </script>

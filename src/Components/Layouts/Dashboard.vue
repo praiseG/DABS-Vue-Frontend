@@ -16,6 +16,7 @@
 
 <script>
 import Navigation from './Navigation';
+import { eBus } from '../../main';
 
 export default {
     components: {
@@ -43,6 +44,8 @@ export default {
     },
     created(){
         // getAppointments();
+        const uname = localStorage.getItem('username');
+        uname && eBus.$emit('loggedInUser', uname);
     },
     mounted(){
         // this.getAccounts();

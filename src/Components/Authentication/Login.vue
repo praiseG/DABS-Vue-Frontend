@@ -41,7 +41,10 @@ export default {
             .then(resp => {
                 console.log(resp);
                 this.loginError = null;
+                localStorage.setItem('token', resp.body.token);
+                localStorage.setItem('username', this.email);
                 eBus.$emit('loggedInUser', this.email);
+                this.$router.push('/');
             },
             error => {
                 console.log(error);
