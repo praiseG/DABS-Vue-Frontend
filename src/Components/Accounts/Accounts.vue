@@ -4,21 +4,28 @@
         <b-card class="mt-3">
             <!-- {{all_accounts}} -->
             <div class="table-responsive">
-                <table id="accounts-tbl" aria-busy="false" class="table b-table table-striped table-hover table-bordered table-sm b-table-fixed">
+                <table id="accounts-tbl" aria-busy="false" class="table b-table table-striped table-hover table-bordered table-sm">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Email</th>
                             <th>Role</th>
                             <th>Designation</th>
+                            <th>Created At</th>
+                            <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-if="all_accounts" v-for="(acc, index) in all_accounts" :key="index">
                             <td>{{index + 1}}</td>
                             <td>{{acc.name}}</td>
+                            <td>{{acc.email}}</td>
                             <td>{{acc.role}}</td>
                             <td>{{acc.designation}}</td>
+                            <td>{{acc.created_at | formatDate}}</td>
+                            <td><i class="fas fa-info"></i></td>
+                            <td><i class="fas fa-edit"></i></td>
                         </tr>
                         <!-- <tr v-if="!all_accounts"><td colspan="4">No Data in Table</td></tr> -->
                     </tbody>
@@ -30,6 +37,8 @@
 
 <script>
 import AccountForm from './AccountForm';
+import { formatDate } from '../../filters';
+
     export default {
         // props:{
         //     all_accounts: {
@@ -45,7 +54,7 @@ import AccountForm from './AccountForm';
             AccountForm
         },
         created(){
-            this.$http.get('accounts', {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6InByYWlzZUBkYWJzLmNvbSIsImV4cCI6MTUzNzU5MTg5NCwiZW1haWwiOiJwcmFpc2VAZGFicy5jb20ifQ.y-HjB8y2GXm2ihV4ZJcuJGsoTondrYzcse7F612H4zA'}})
+            this.$http.get('accounts')
             .then(
                 resp => {
                     console.log(resp);
@@ -54,6 +63,9 @@ import AccountForm from './AccountForm';
                 error => {
                     console.log(error)
             });
+        },
+        filters: {
+            formatDate
         }
     }
 </script>

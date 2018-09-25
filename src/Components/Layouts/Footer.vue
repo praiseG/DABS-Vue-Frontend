@@ -1,8 +1,8 @@
 <template>
     <footer class="footer"> 
-        <div class="container">
+        <div class="container-fluid">
             <div class="content">
-                <p>Dabs &copy;{{year}} - by Praise Mariah <a href="https://github.com/praiseG">(https://github.com/praiseG)</a></p> 
+                <p>Dabs &copy;{{year}} - by Praise Mariah <i class="fab fa-github"></i><a href="https://github.com/praiseG">(https://github.com/praiseG)</a></p> 
             </div>
         </div>    
     </footer>
@@ -12,7 +12,7 @@
 export default {
     data(){
         return {
-            year: (new Date).getYear()
+            year: (new Date).getFullYear()
         }
     }
 }
@@ -20,14 +20,15 @@ export default {
 
 <style scoped>
     footer{
-        background: #222;
-        padding: 1rem 1.5rem 1rem;
-        position: absolute;
-        right: 0;
+        position: fixed;
         bottom: 0;
-        left: 0;
+        width: 100%;
+        background: #222;
         color: gainsboro;
         text-align: center;
+    } 
+    footer p {
+        padding-top: 10px;
     }
 </style>
 

@@ -1,8 +1,6 @@
 <template>
     <b-nav vertical>
-        <!-- <b-nav-item></b-nav-item> -->
         <b-nav-item :to="link" v-for="link in links" v-bind:key=link>
-            <!-- <router-link :to="link">{{link}}</router-link> -->
             {{link}}
         </b-nav-item>
         <!-- <b-nav-item></b-nav-item> -->

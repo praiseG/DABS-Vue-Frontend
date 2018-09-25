@@ -3,7 +3,7 @@
         <PatientForm />
         <b-card class="mt-3">
             <div class="table-responsive">
-                <table id="accounts-tbl" aria-busy="false" class="table b-table table-striped table-hover table-bordered table-sm b-table-fixed">
+                <table id="accounts-tbl" aria-busy="false" class="table b-table table-striped table-hover table-bordered table-sm">
                     <thead>
                         <tr>
                             <th>#</th>
