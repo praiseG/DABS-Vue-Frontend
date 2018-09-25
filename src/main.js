@@ -62,7 +62,7 @@ Vue.http.interceptors.push(request => {
     !rUrls.includes(request.url) && aToken && request.headers.set('Authorization', 'JWT '+ aToken);
     request.headers.set('content-type', 'application/json');
     console.log(request);
-    
+
     // You can chose to refresh your token here as well. 
     // I have simply chosen to logout if the token is expired.
 

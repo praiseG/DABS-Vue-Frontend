@@ -65,7 +65,7 @@ import { formatDate } from '../../filters';
             });
         },
         filters: {
-            formatDate
+            formatDate,
         }
     }
 </script>

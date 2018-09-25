@@ -13,7 +13,9 @@ export default [
         {path: '', component: Appointments},
         {path: 'appointments', component: Appointments},
         {path: 'appointments/:id', component: AppointmentDetail},
-        {path: 'staff', component: Accounts},
+        {path: 'staff',component: Accounts},
+        // {path: 'accounts/staff', alias: 'staff', component: Accounts},
+        // {path: 'accounts/doctors', alias: 'doctors', component: Accounts},
         {path: 'patients', component: Patients},
     ],
     meta: {

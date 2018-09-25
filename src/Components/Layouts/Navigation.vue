@@ -1,6 +1,6 @@
 <template>
     <b-nav vertical>
-        <b-nav-item :to="link" v-for="link in links" v-bind:key=link>
+        <b-nav-item :to="link | toLowerCase" v-for="link in links" v-bind:key=link>
             {{link}}
         </b-nav-item>
         <!-- <b-nav-item></b-nav-item> -->
@@ -8,11 +8,15 @@
 </template>
 
 <script>
+import { toLowerCase } from '../../filters';
 export default {
     data(){
         return {
             links: ['Appointments', 'Patients' , 'Doctors', 'Staff']
         }
+    },
+    filters:{
+        toLowerCase
     }
 }
 </script>
