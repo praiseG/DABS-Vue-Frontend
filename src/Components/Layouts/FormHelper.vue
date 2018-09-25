@@ -5,14 +5,7 @@
         </b-btn><br /><br />
         <b-collapse id="collapse1" class="mt-2">
             <b-card>
-                <b-form @submit.prevent="handleSubmit">
-                    <slot name="fields-row"></slot>
-                    <b-row>
-                        <b-col cols="3" class="mt-3">
-                            <b-button class="btn-dabs" type="submit">Submit</b-button>
-                        </b-col>
-                    </b-row>
-                </b-form>
+                <slot name="fields-row"></slot>  
             </b-card>
         </b-collapse>
     </div>

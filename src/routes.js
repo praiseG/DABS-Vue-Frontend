@@ -4,6 +4,7 @@ import NotFound from './Components/Layouts/NotFound';
 import Dashboard from './Components/Layouts/Dashboard';
 import Appointments from './Components/Appointments/Appointments';
 import Accounts from './Components/Accounts/Accounts';
+import Doctors from './Components/Accounts/Doctors';
 import Patients from './Components/Patients/Patients';
 import AppointmentDetail from './Components/Appointments/AppointmentDetail';
 
@@ -13,9 +14,8 @@ export default [
         {path: '', component: Appointments},
         {path: 'appointments', component: Appointments},
         {path: 'appointments/:id', component: AppointmentDetail},
-        {path: 'staff',component: Accounts},
-        // {path: 'accounts/staff', alias: 'staff', component: Accounts},
-        // {path: 'accounts/doctors', alias: 'doctors', component: Accounts},
+        {path: 'staff', component: Accounts},
+        {path: 'doctors', component: Doctors},
         {path: 'patients', component: Patients},
     ],
     meta: {

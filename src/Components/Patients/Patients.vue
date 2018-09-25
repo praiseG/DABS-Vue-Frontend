@@ -13,7 +13,7 @@
                             <th>Age</th>
                             <th>Disability</th>
                             <th>Registered</th>
-                            <td colspan="2"></td>
+                            <td colspan="3"></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,6 +25,7 @@
                             <td>{{acc.age}}</td>
                             <td>{{acc.disability}}</td>
                             <td>{{acc.registered_on | formatDateTime }}</td>
+                            <td><i class="fas fa-history text-info"></i></td>
                             <td><i class="fas fa-info text-info"></i></td>
                             <td><i class="fas fa-edit text-info"></i></td>
                         </tr>      

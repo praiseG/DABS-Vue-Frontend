@@ -3,7 +3,6 @@
         <b-btn v-b-toggle.collapse1 variant="primary" class="btn-dabs float-right"><i class="fas fa-plus" /> New Patient</b-btn><br /><br />
         <b-collapse id="collapse1" class="mt-2">
             <b-card>
-                {{selected}}
                 <b-form>
                     <b-row>
                         <b-col cols="4">

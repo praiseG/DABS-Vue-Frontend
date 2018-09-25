@@ -1,7 +1,8 @@
 <template>
     <FormHelper>
         <span slot="add-label">Appointment</span>
-        <b-row slot="fields-row">
+        <b-form @submit.prevent="handleSubmit" slot="fields-row">
+        <b-row>
             <b-col cols="4">
                 <b-form-select v-model="selected">
                     <template slot="first">
@@ -29,6 +30,12 @@
                 <b-form-textarea placeholder="Description" :rows="3" />
             </b-col>
         </b-row>
+        <b-row>
+            <b-col cols="3" class="mt-3">
+                <b-button class="btn-dabs" type="submit">Submit</b-button>
+            </b-col>
+        </b-row>
+        </b-form>
     </FormHelper>
 </template>
 

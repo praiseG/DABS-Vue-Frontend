@@ -84,4 +84,5 @@ a, .text-dabs {
 .table{
   background: #fff;
 }
+
 </style>

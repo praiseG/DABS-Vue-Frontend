@@ -12,7 +12,7 @@ import { toLowerCase } from '../../filters';
 export default {
     data(){
         return {
-            links: ['Appointments', 'Patients' , 'Doctors', 'Staff']
+            links: ['Appointments', 'Patients' , 'Doctors', 'Staff', 'Treatments']
         }
     },
     filters:{

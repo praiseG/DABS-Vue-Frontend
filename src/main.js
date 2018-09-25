@@ -3,6 +3,7 @@ import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
 import Routes from './routes';
+import VeeValidate from 'vee-validate';
 
 
 
@@ -22,6 +23,7 @@ import App from './App.vue'
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 Vue.use(VueRouter);
+Vue.use(VeeValidate, {events: ''});
 
 
 const router = new VueRouter({
