@@ -1,7 +1,7 @@
 <template>
     <b-navbar toggleable="md" type="dark" variant="info"> 
         <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
-        <b-navbar-brand href="/"><img  class="nav-logo" src="../../assets/logo.png" /><strong>  {{ appName }}</strong></b-navbar-brand>
+        <b-navbar-brand><b-link to="/"><img  class="nav-logo" src="../../assets/logo.png" /><strong>  {{ appName }}</strong></b-link></b-navbar-brand>
         <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right v-if="username">
                 <template slot="button-content">
@@ -37,5 +37,10 @@ export default {
 .nav-logo {
     width: 30px;
     height: 30px;
+}
+
+.navbar-brand a{
+    color: white;
+    text-decoration: none;
 }
 </style>

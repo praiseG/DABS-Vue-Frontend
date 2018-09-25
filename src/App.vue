@@ -56,7 +56,7 @@ li {
   margin: 0 10px;
 }
 
-a {
+a, .text-dabs {
   color: #009EBA;
 }
 

@@ -30,32 +30,24 @@ export default {
         }
     },
     methods:{
-        // getAccounts(){
-        //     this.$http.get('accounts', {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6InByYWlzZUBkYWJzLmNvbSIsImV4cCI6MTUzNzU5MTM2OCwiZW1haWwiOiJwcmFpc2VAZGFicy5jb20ifQ.3NL6NeE8u35rbOJ801Ax55wc272p2l0rxiix2MrPgYY'}})
-        //     .then(
-        //         resp => {
-        //             console.log(resp);
-        //             this.all_accounts = resp.body;
-        //         }, 
-        //         error => {
-        //             console.log(error)
-        //     });
-        // }
+       
     },
     created(){
-        // getAppointments();
         const uname = localStorage.getItem('username');
         uname && eBus.$emit('loggedInUser', uname);
     },
-    mounted(){
-        // this.getAccounts();
-        // getPatients();
-    }
+   
 }
 </script>
 <style scoped>
 .container{
     max-width: 1326px;
     padding-left: 0px;
+}
+.col{
+    padding-left: 0px;
+}
+ul{
+    width: 95%;
 }
 </style>

@@ -1,23 +1,32 @@
 <template>
     <div>
         <PatientForm />
-        <b-card class="mt-3">
+        <b-card class="mt-3" header="Patients">
             <div class="table-responsive">
                 <table id="accounts-tbl" aria-busy="false" class="table b-table table-striped table-hover table-bordered table-sm">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Role</th>
-                            <th>Designation</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Age</th>
+                            <th>Disability</th>
+                            <th>Registered</th>
+                            <td colspan="2"></td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(acc, index) in accounts" :key="index">
                             <td>{{index + 1}}</td>
-                            <td>{{acc.name}}</td>
-                            <td>{{acc.role}}</td>
-                            <td>{{acc.designation}}</td>
+                            <td>{{acc.name | capitalize}}</td>
+                            <td>{{acc.email}}</td>
+                            <td>{{acc.mobile}}</td>
+                            <td>{{acc.age}}</td>
+                            <td>{{acc.disability}}</td>
+                            <td>{{acc.registered_on | formatDateTime }}</td>
+                            <td><i class="fas fa-info text-info"></i></td>
+                            <td><i class="fas fa-edit text-info"></i></td>
                         </tr>      
                     </tbody>
                 </table>
@@ -28,20 +37,27 @@
 
 <script>
 import PatientForm from './PatientForm';
+import { formatDateTime, capitalize } from '../../filters';
     export default {
         data(){
             return {
-                accounts: [
-                    {name: 'Praise Mariah', role: 'Admin', designation: 'System Admin'},
-                    {name: 'Eve Nankanja', role: 'doctor', designation: 'Neuro Sergeon'},
-                    {name: 'Gabriel Kyagulanyi', role: 'doctor', designation: 'Chief of Surgery'},
-                    {name: 'Carol Nanvuma', role: 'doctor', designation: 'Cardiologist'},
-                    {name: 'Cynthia Nantaba', role: 'doctor', designation: 'Paediatrician'}
-                ]
+                accounts: []
             }
         },
         components:{
             PatientForm
+        },
+        created(){
+            this.$http.get('patients')
+            .then(response => {
+                    this.accounts = response.body;
+                }, error =>{
+                    console.log(errors);
+            })
+        },
+        filters:{
+            formatDateTime,
+            capitalize
         }
     }
 </script>
