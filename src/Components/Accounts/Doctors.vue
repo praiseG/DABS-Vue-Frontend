@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { formatDate } from '../../filters';
+import { formatDate } from '../../Filters/filters';
 
     export default {
         data(){

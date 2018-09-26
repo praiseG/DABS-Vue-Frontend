@@ -40,33 +40,29 @@ export default {
     methods: {
         handleLogin(){ 
             this.submitted = true;
-            
             this.$validator.validate().then(valid =>{
                 if(valid){
-                    this.$http.post('auth/token/', {
+                    this.$store.dispatch('obtainToken', {
                         "email": this.email,
                         "password": this.password
-                    })
-                    .then(resp => {
-                        console.log(resp);
-                        this.loginError = null;
-                        localStorage.setItem('token', resp.body.token);
-                        localStorage.setItem('username', this.email);
-                        eBus.$emit('loggedInUser', this.email);
-                        this.$router.push('/');
-                    },
-                    error => {
-                        this.formErrors= true;
-                        console.log(error);
-                        switch(error.status){
-                            case 400:
-                                this.loginError = error.body.non_field_errors[0];
-                                break;
-                            default:
-                                this.loginError = "Error Logging in: " + error.status + "-" + error.statusText;
-                                break
-                        }   
-                        
+                    }).then(response =>{
+                            console.log(response);
+                            this.$router.push('/');
+                         },
+                        error => {
+                            console.log(error);
+                            switch(error.status){
+                                case 400:
+                                    this.loginError = error.body.non_field_errors[0];
+                                    break;
+                                case 0:
+                                    this.loginError = "No connection to Authentication Server. Please try again Later.";
+                                    break;
+                                default:
+                                    this.loginError = error.status + "-" + error.statusText;
+                                    break
+                            } 
+                            this.formErrors = true;  
                     });
                 }else{
                     this.formErrors = true;

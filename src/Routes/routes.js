@@ -1,12 +1,12 @@
-import Login from './Components/Authentication/Login';
-import Logout from './Components/Authentication/Logout';
-import NotFound from './Components/Layouts/NotFound';
-import Dashboard from './Components/Layouts/Dashboard';
-import Appointments from './Components/Appointments/Appointments';
-import Accounts from './Components/Accounts/Accounts';
-import Doctors from './Components/Accounts/Doctors';
-import Patients from './Components/Patients/Patients';
-import AppointmentDetail from './Components/Appointments/AppointmentDetail';
+import Login from '../Components/Authentication/Login';
+import Logout from '../Components/Authentication/Logout';
+import NotFound from '../Components/Layouts/NotFound';
+import Dashboard from '../Components/Layouts/Dashboard';
+import Appointments from '../Components/Appointments/Appointments';
+import Accounts from '../Components/Accounts/Accounts';
+import Doctors from '../Components/Accounts/Doctors';
+import Patients from '../Components/Patients/Patients';
+import AppointmentDetail from '../Components/Appointments/AppointmentDetail';
 
 export default [
     {path:'/', component: Dashboard,

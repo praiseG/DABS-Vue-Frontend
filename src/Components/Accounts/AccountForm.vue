@@ -53,7 +53,7 @@
 <script>
 
 import FormHelper from '../Layouts/FormHelper';
-import { capitalize } from '../../filters';
+import { capitalize } from '../../Filters/filters';
 export default {
     data(){
         return{
@@ -95,7 +95,5 @@ export default {
 </script>
 
 <style scoped>
-input[type="checkbox" i] {
-  background: #fff;
-}
+
 </style>

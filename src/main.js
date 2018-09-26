@@ -2,7 +2,8 @@ import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
-import Routes from './routes';
+import Routes from './Routes/routes';
+import { store } from './Store/store';
 import VeeValidate from 'vee-validate';
 
 
@@ -55,7 +56,7 @@ router.beforeEach((to,from, next) => {
   }
 });
 
-Vue.http.options.root = 'http://localhost:8003/api/v1/';
+Vue.http.options.root = store.state.endPoints.root;
 
 Vue.http.interceptors.push(request => {
     console.log("INTERCEPTOR");
@@ -77,8 +78,6 @@ Vue.http.interceptors.push(request => {
     }
 });
 
-// Vue.http.headers.common['content-type'] = 'application/json';
-
 Vue.config.productionTip = false;
 
 export const eBus = new Vue();
@@ -87,4 +86,5 @@ new Vue({
   el: '#app',
   render: h => h(App),
   router: router,
+  store: store,
 })

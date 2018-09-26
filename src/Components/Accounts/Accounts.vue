@@ -36,7 +36,7 @@
 
 <script>
 import AccountForm from './AccountForm';
-import { formatDate } from '../../filters';
+import { formatDate } from '../../Filters/filters';
 
     export default {
         data(){

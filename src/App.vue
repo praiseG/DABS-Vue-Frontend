@@ -1,8 +1,6 @@
 <template>
   <div>
     <Header />
-    <!-- <Dashboard /> -->
-    <!-- <Login /> -->
     <router-view></router-view>
     <Footer />
   </div>

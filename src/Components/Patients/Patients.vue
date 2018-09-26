@@ -38,7 +38,7 @@
 
 <script>
 import PatientForm from './PatientForm';
-import { formatDateTime, capitalize } from '../../filters';
+import { formatDateTime, capitalize } from '../../Filters/filters';
     export default {
         data(){
             return {

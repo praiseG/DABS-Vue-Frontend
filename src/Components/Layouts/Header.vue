@@ -1,6 +1,5 @@
 <template>
     <b-navbar toggleable="md" type="dark" variant="info"> 
-        <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
         <b-navbar-brand><b-link to="/"><img  class="nav-logo" src="../../assets/logo.png" /><strong>  {{ appName }}</strong></b-link></b-navbar-brand>
         <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right v-if="username">
@@ -14,20 +13,17 @@
 </template>
 
 <script>
-import { eBus } from '../../main';
 
 export default {
     data(){
         return {
             appName: "DABS",
-            username: null
         }
     },
-    created(){
-        eBus.$on('loggedInUser', data => {
-            this.username = data;
-        })
-        // this.username = localStorage.getItem('username')
+    computed:{
+        username(){
+            return this.$store.state.username;
+        }
     }
 }
 </script>

@@ -5,8 +5,7 @@
 <script>
 export default {
     created(){
-        localStorage.removeItem('username');
-        localStorage.removeItem('token');
+        this.$store.dispatch('logoutUser');
         this.$router.push('/login');
     }
 }

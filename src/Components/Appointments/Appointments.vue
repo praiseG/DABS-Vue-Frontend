@@ -44,7 +44,7 @@
 
 <script>
 import AppointmentForm from './AppointmentForm';
-import { formatDateTime, capitalize } from '../../filters';
+import { formatDateTime, capitalize } from '../../Filters/filters';
 export default {
     components: {
         AppointmentForm
