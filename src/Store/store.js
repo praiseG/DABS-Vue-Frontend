@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import jwt_decode from 'jwt-decode';
+import router from '../Router/router';
 
 
 Vue.use(Vuex);
@@ -52,11 +54,11 @@ export const store = new Vuex.Store({
             });
         },
         refreshToken: context => {
-            Vue.http.post(state.endPoints.refresh, {
+            Vue.http.post(context.state.endPoints.refresh, {
                 "token": context.state.token
             })
             .then(resp => {
-                console.log(resp);
+                console.log("New Token: " + resp.body.token);
                 context.commit('updateToken', resp.body.token);
             },
             error => {
@@ -69,15 +71,19 @@ export const store = new Vuex.Store({
                 const decoded = jwt_decode(token);
                 const orig_iat = decoded.orig_iat;
                 const exp = decoded.exp;
-                
-                if(exp - (Date.now()/1000) < 1800 && (Date.now()/1000) - orig_iat < 628200){
+                console.log("The Times ");
+                console.log(orig_iat);
+                console.log(exp);
+                if(exp - (Date.now()/1000) <= 1800 && (Date.now()/1000) - orig_iat < 628200){
+                    console.log("*************refreshing");
                     context.dispatch('refreshToken');
-                }else if(exp - (Date.now()/1000) < 1800){
-                    //DO NOTHING
+                }else if(exp - (Date.now()/1000) <= 1800 || exp - (Date.now()/1000) > 1800){
+                    console.log("***********DO NOTHING");
                 }else{
                     context.commit('removeToken');
                     context.commit('removeUsername');
-                    Vue.router.push('/login');
+                    console.log("***********logging out");
+                    router.push('/logout');
                 }
             }
         },
