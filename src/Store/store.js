@@ -80,10 +80,9 @@ export const store = new Vuex.Store({
                 }else if(exp - (Date.now()/1000) <= 1800 || exp - (Date.now()/1000) > 1800){
                     console.log("***********DO NOTHING");
                 }else{
-                    context.commit('removeToken');
-                    context.commit('removeUsername');
                     console.log("***********logging out");
-                    router.push('/logout');
+                    context.dispatch('logoutUser');
+                    router.push('/login');
                 }
             }
         },
