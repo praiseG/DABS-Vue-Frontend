@@ -16,7 +16,8 @@ export const store = new Vuex.Store({
             root: 'http://localhost:8003/api/v1/',
             auth: 'auth/token/',
             refresh: 'refresh/token/',
-        }
+        },
+        accounts: []
     },
     mutations:{
        updateUsername: (state, payload) => {
@@ -34,6 +35,9 @@ export const store = new Vuex.Store({
        removeToken: state => {
            localStorage.removeItem('token');
            state.token = null;
+       },
+       updateAccounts: (state, payload) => {
+           state.accounts = payload;
        }
     },
     actions:{
@@ -63,6 +67,8 @@ export const store = new Vuex.Store({
             },
             error => {
                 console.log(error);
+                context.dispatch('logoutUser');
+                router.push('/login');
             });
         },
         verifyToken: context => {
@@ -79,6 +85,7 @@ export const store = new Vuex.Store({
                     context.dispatch('refreshToken');
                 }else if(exp - (Date.now()/1000) <= 1800 || exp - (Date.now()/1000) > 1800){
                     console.log("***********DO NOTHING");
+                    // OR VERIFY THE TOKEN HERE
                 }else{
                     console.log("***********logging out");
                     context.dispatch('logoutUser');
@@ -89,6 +96,46 @@ export const store = new Vuex.Store({
         logoutUser: context => {
             context.commit('removeUsername');
             context.commit('removeToken');
+        },
+        getAccounts: context =>{
+            return new Promise((resolve, reject) => {
+                Vue.http.get('accounts')
+                .then(
+                    resp => {
+                        console.log(resp);
+                        context.commit('updateAccounts', resp.body);
+                        resolve(resp);
+                    }, 
+                    error => {
+                        reject(error);
+                });
+            });
+        },
+        getAccount: (context, id) =>{
+            return new Promise((resolve, reject) => {
+                Vue.http.get('accounts/' + id)
+                .then(
+                    resp => {
+                        console.log(resp);
+                        resolve(resp);
+                    }, 
+                    error => {
+                        reject(error);
+                });
+            });
+        },
+        updateAccount: (context, payload) =>{
+            return new Promise((resolve, reject) => {
+                Vue.http.put('accounts/' + payload.id + '/', payload)
+                .then(
+                    resp => {
+                        console.log(resp);
+                        resolve(resp);
+                    }, 
+                    error => {
+                        reject(error);
+                });
+            });
         }
 
     }

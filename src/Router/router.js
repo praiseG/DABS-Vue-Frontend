@@ -1,9 +1,13 @@
 import Login from '../Components/Authentication/Login';
 import Logout from '../Components/Authentication/Logout';
 import NotFound from '../Components/Layouts/NotFound';
+import Forbidden from '../Components/Layouts/Forbidden';
 import Dashboard from '../Components/Layouts/Dashboard';
 import Appointments from '../Components/Appointments/Appointments';
 import Accounts from '../Components/Accounts/Accounts';
+import AccountInfo from '../Components/Accounts/AccountInfo';
+import EditAccount from '../Components/Accounts/EditAccount';
+import ResetPassword from '../Components/Accounts/ResetPassword';
 import Doctors from '../Components/Accounts/Doctors';
 import Patients from '../Components/Patients/Patients';
 import AppointmentDetail from '../Components/Appointments/AppointmentDetail';
@@ -20,15 +24,25 @@ const routes = [
         {path: 'appointments/:id', component: AppointmentDetail},
         {path: 'staff', component: Accounts},
         {path: 'doctors', component: Doctors},
+        {path: 'accounts/:id', component: AccountInfo}, 
+        {path: 'accounts/:id/edit', component: EditAccount},
+        {path: 'accounts/:id/reset-password', component: ResetPassword},
         {path: 'patients', component: Patients},
     ],
     meta: {
-        requiresLogin: true
+        requiresLogin: true,
+        permission: 'doctor',
+        fail: '/Forbidden'
     }
     },
-    {path: '/login', component: Login, meta: {requiresVisitor: true}},  
+    {path: '/login', component: Login, meta: {
+      requiresVisitor: true,
+      permission: 'any',
+      fail: '/forbidden'
+    }},  
     {path: '/logout', component: Logout},
-    {path:'/NotFound',component: NotFound}
+    {path:'/notfound',component: NotFound},
+    {path:'/forbidden',component: Forbidden}
 ]
 
 const router = new VueRouter({
@@ -38,24 +52,23 @@ const router = new VueRouter({
 
 router.beforeEach((to,from, next) => {
     if(!to.matched.length){
-      next('/NotFound');
-    } else if(to.matched.some(record => record.meta.requiresLogin)) {
+      next('/notfound');
+      // next('/forbidden');
+    }else if(to.matched.some(record => record.meta.requiresLogin)) {
       if(localStorage.getItem('token') == null){
         console.log('requires Login');
         next('/login');
-      }else{
+      } else{
         next();
       }
-    }
-    else if(to.matched.some(record => record.meta.requiresVisitor)) {
+    }else if(to.matched.some(record => record.meta.requiresVisitor)) {
       if(localStorage.getItem('token')){
         console.log('requires Visitor');
         next('/');
       }else{
         next();
       }
-    }
-    else{
+    }else{
       next();
     }
 });

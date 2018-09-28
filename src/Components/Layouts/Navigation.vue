@@ -1,6 +1,6 @@
 <template>
     <b-nav vertical>
-        <b-nav-item :to="link | toLowerCase" v-for="link in links" v-bind:key=link>
+        <b-nav-item :to="'/' + link | toLowerCase" v-for="link in links" v-bind:key=link>
             {{link}}
         </b-nav-item>
         <!-- <b-nav-item></b-nav-item> -->

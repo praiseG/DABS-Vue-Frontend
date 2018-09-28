@@ -9,3 +9,4 @@ export const toLowerCase = value => String(value).toLowerCase();
 export const toUpperCase = value => String(value).toUpperCase();
 
 export const capitalize = value => String(value).charAt(0).toUpperCase() + String(value).slice(1);
+

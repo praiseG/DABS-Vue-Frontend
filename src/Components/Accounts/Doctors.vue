@@ -21,8 +21,8 @@
                             <td>{{doc.designation}}</td>
                             <td>{{doc.created_at | formatDate}}</td>
                             <td><i class="fas fa-clipboard-list text-info"></i></td>
-                            <td><i class="fas fa-info text-info"></i></td>
-                            <td><i class="fas fa-edit text-info"></i></td>
+                            <td><router-link :to="'accounts/' + doc.id + ''"><i class="fas fa-info text-info"></i></router-link></td>
+                            <td><router-link :to="'accounts/' + doc.id + '/edit'"><i class="fas fa-user-edit text-info"></i></router-link></td>
                         </tr>
                         <!-- <tr v-if="!all_doctors"><td colspan="4">No Data in Table</td></tr> -->
                     </tbody>

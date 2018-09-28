@@ -23,10 +23,9 @@
                             <td>{{acc.role}}</td>
                             <td>{{acc.designation}}</td>
                             <td>{{acc.created_at | formatDate}}</td>
-                            <td><i class="fas fa-info text-info"></i></td>
-                            <td><i class="fas fa-edit text-info"></i></td>
+                            <td><router-link :to="'accounts/' + acc.id + ''"><i class="fas fa-info text-info"></i></router-link></td>
+                            <td><router-link :to="'accounts/' + acc.id + '/edit'"><i class="fas fa-user-edit text-info"></i></router-link></td>
                         </tr>
-                        <!-- <tr v-if="!all_accounts"><td colspan="4">No Data in Table</td></tr> -->
                     </tbody>
                 </table>
             </div>
@@ -36,27 +35,27 @@
 
 <script>
 import AccountForm from './AccountForm';
+import EditAccount from './EditAccount';
 import { formatDate } from '../../Filters/filters';
 
     export default {
         data(){
             return {
-                all_accounts: []
+                all_accounts: [],
             }
         },
         components:{
-            AccountForm
+            AccountForm,
+            EditAccount
+        },
+        beforeCreate(){
+            this.$store.dispatch('getAccounts');
         },
         created(){
-            this.$http.get('accounts')
-            .then(
-                resp => {
-                    console.log(resp);
-                    this.all_accounts = resp.body;
-                }, 
-                error => {
-                    console.log(error)
-            });
+            this.all_accounts = this.$store.state.accounts;
+        },
+        beforeMount(){
+            this.all_accounts = this.$store.state.accounts;
         },
         filters: {
             formatDate,

@@ -7,6 +7,7 @@ import VeeValidate from 'vee-validate';
 
 
 
+
 window.$ = window.jQuery = require('jquery');
 require('popper.js');
 
