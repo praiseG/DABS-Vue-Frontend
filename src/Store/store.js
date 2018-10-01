@@ -60,6 +60,13 @@ export const store = new Vuex.Store({
        },
        updateAccounts: (state, payload) => {
            state.accounts = payload;
+       },
+       updateAccount: (state, payload) => {
+           let acc = store.getters.getAccount(payload.id);
+           acc && _.extend(acc, payload);
+       },
+       createAccount: (state, payload) => {
+           state.accounts.push(payload);
        }
     },
     actions:{
@@ -139,6 +146,7 @@ export const store = new Vuex.Store({
                 .then(
                     resp => {
                         //update accounts store
+                        context.commit('updateAccount', payload); 
                         console.log(resp);
                         resolve(resp);
                     }, 
@@ -153,6 +161,19 @@ export const store = new Vuex.Store({
                 .then(
                     response => resolve(response),
                     error => reject(error)
+                );
+            });
+        },
+        createAccount: (context, payload) => {
+            return new Promise((resolve, reject) => {
+                Vue.http.post('accounts/', payload)
+                .then(
+                    resp => {
+                        //add account to accounts array
+                        context.commit('createAccount', resp.body);
+                        resolve(resp);
+                    },
+                    error => { reject(error);}
                 );
             });
         }

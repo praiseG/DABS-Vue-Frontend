@@ -73,7 +73,7 @@
                     </b-col>
                     <b-col cols="4">
                         <b-form-group label="Confirm Password:">
-                        <b-form-input type="password" name="confirm_password" v-validate="'required|confirmed:password'" v-model.lazy="confirm_password" placeholder="Confirm Password" data-vv-as="password"/>
+                        <b-form-input type="password" name="confirm_password" v-validate="'required|confirmed:password'" v-model.lazy="confirm_password" placeholder="Confirm Password" data-vv-as="Confirm Password"/>
                         </b-form-group>
                     </b-col>
                     <b-col cols="4">

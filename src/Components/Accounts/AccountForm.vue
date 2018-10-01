@@ -2,9 +2,11 @@
     <FormHelper>
         <span slot="add-label">Account</span>
         <b-form @submit.prevent="handleSubmit" slot="fields-row">
-        <b-alert v-if="formInvalid" variant="danger" show>
+        <b-alert v-if="submitted && formInvalid" variant="danger" show>
             <p v-for="error in errors.items" :key="error.id">{{error.msg}}</p>
+            <p v-if="apiErrors">{{apiErrors}}</p>
         </b-alert>
+        <b-alert v-if="submitted && success" variant="success" show>{{success}}</b-alert>
         <b-row>
             <b-col cols="4">
                 <b-form-input v-validate="'required'" name="name" type="text" v-model.lazy="account.name" placeholder="Name"/>
@@ -26,10 +28,10 @@
                 <b-form-input type="text" name="designation" v-validate="'required'" v-model.lazy="account.designation" placeholder="Enter Designation" />
             </b-col>
             <b-col cols="4" class="mt-2">
-                <b-form-input type="password" name="password" v-validate="'required'" v-model.lazy="account.password" placeholder="Enter Password" />
+                <b-form-input type="password" name="password" ref="password" v-validate="'required'" v-model.lazy="account.password" placeholder="Enter Password" />
             </b-col>
             <b-col cols="4" class="mt-2">
-                <b-form-input type="password" name="confirm_password" v-validate="'required'" v-model.lazy="confirm_password" placeholder="Confirm Password" />
+                <b-form-input type="password" name="confirm_password" v-validate="'required|confirmed:password'" v-model.lazy="account.confirm_password" placeholder="Confirm Password" data-vv-as="Confirm Password"/>
             </b-col>
             <b-col cols="4" class="mt-2">
                 <b-form-checkbox v-model.lazy="account.is_staff">Staff</b-form-checkbox>
@@ -57,20 +59,23 @@ import { capitalize } from '../../Filters/filters';
 export default {
     data(){
         return{
-            confirm_password: null,
             submitted: false,
             formInvalid: false,
+            apiErrors: null,
             roles: ['doctor','helpdesk', 'manager'],
-            account: {
+            success: null,
+            account_fields: {
                 "name": null,
                 "email": null,
                 "role": null,
                 "designation": null,
                 "password": null,
+                "confirm_password": null,
                 "is_active": true,
                 "is_staff": false,
                 "is_superuser": false
-            }
+            },
+            account: null
         }
     },
     components: {
@@ -84,12 +89,27 @@ export default {
             this.submitted = true;
             this.$validator.validateAll().then(valid =>{
                 if(valid){
-                    console.log(this.account);
+                    this.formInvalid = false;
+                    this.$store.dispatch('createAccount', this.account)
+                    .then(resp => {
+                        this.success = "Account Creation Successful";
+                        this.apiErrors = null;
+                        console.log(resp);
+                        this.account = this.account_fields;
+                    }, error => {
+                        console.log(error)
+                        this.formInvalid = true;
+                        this.apiErrors =Object.values(error.body)[0];
+                    });
+                    
                 }else{
                     this.formInvalid = true;
                 }
             });
         }
+    },
+    created(){
+        this.account = this.account_fields;
     }
 }
 </script>
