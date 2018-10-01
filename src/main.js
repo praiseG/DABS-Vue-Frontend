@@ -4,9 +4,11 @@ import VueResource from 'vue-resource';
 import Router from './Router/router';
 import { store } from './Store/store';
 import VeeValidate from 'vee-validate';
+import underscore from 'underscore';
 
 
 
+Object.defineProperty(Vue.prototype, '$_', { value: underscore });
 
 window.$ = window.jQuery = require('jquery');
 require('popper.js');
@@ -24,6 +26,7 @@ import App from './App.vue'
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 Vue.use(VeeValidate, {events: ''});
+
 
 
 Vue.http.options.root = store.state.endPoints.root;

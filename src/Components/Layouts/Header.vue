@@ -13,18 +13,17 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex';
 export default {
     data(){
         return {
             appName: "DABS",
         }
     },
-    computed:{
-        username(){
-            return this.$store.state.username;
-        }
-    }
+    computed: mapState([
+        'username'
+    ])
+    
 }
 </script>
 

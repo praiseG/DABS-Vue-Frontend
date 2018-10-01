@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import jwt_decode from 'jwt-decode';
 import router from '../Router/router';
+import _ from 'underscore';
 
 
 Vue.use(Vuex);
@@ -18,6 +19,27 @@ export const store = new Vuex.Store({
             refresh: 'refresh/token/',
         },
         accounts: []
+    },
+    getters:{
+        getStaff: state => {
+            if(state.accounts)
+                return _.filter(state.accounts, account => account.role != "doctor");
+            return null;
+        },
+        getDoctors: state => {
+            if(state.accounts)
+                return _.filter(state.accounts, account => account.role == "doctor");
+            return null;
+        },
+        getAccount: state => id => {
+            console.log("inside get account getter");
+            console.log(id);
+            console.log(state.accounts);
+
+            if(state.accounts)
+                return _.find(state.accounts, account => account.id == id);
+            return null;
+        }
     },
     mutations:{
        updateUsername: (state, payload) => {
@@ -111,11 +133,12 @@ export const store = new Vuex.Store({
                 });
             });
         },
-        getAccount: (context, id) =>{
+        updateAccount: (context, payload) =>{
             return new Promise((resolve, reject) => {
-                Vue.http.get('accounts/' + id)
+                Vue.http.put('accounts/' + payload.id + '/', payload)
                 .then(
                     resp => {
+                        //update accounts store
                         console.log(resp);
                         resolve(resp);
                     }, 
@@ -124,17 +147,13 @@ export const store = new Vuex.Store({
                 });
             });
         },
-        updateAccount: (context, payload) =>{
+        resetPassword: (context, payload) => {
             return new Promise((resolve, reject) => {
-                Vue.http.put('accounts/' + payload.id + '/', payload)
+                Vue.http.put('accounts/' + payload.id + '/reset-password/', payload)
                 .then(
-                    resp => {
-                        console.log(resp);
-                        resolve(resp);
-                    }, 
-                    error => {
-                        reject(error);
-                });
+                    response => resolve(response),
+                    error => reject(error)
+                );
             });
         }
 

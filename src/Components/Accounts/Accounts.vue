@@ -12,20 +12,26 @@
                             <th>Role</th>
                             <th>Designation</th>
                             <th>Created At</th>
+                            <th>Active</th>
                             <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-if="all_accounts" v-for="(acc, index) in all_accounts" :key="index">
+                        <tr v-if="staff" v-for="(acc, index) in staff" :key="index">
                             <td>{{index + 1}}</td>
                             <td>{{acc.name}}</td>
                             <td>{{acc.email}}</td>
                             <td>{{acc.role}}</td>
                             <td>{{acc.designation}}</td>
                             <td>{{acc.created_at | formatDate}}</td>
-                            <td><router-link :to="'accounts/' + acc.id + ''"><i class="fas fa-info text-info"></i></router-link></td>
-                            <td><router-link :to="'accounts/' + acc.id + '/edit'"><i class="fas fa-user-edit text-info"></i></router-link></td>
+                            <td>
+                                <b-badge variant="success" v-if="acc.is_active">Yes</b-badge>
+                                <b-badge variant="danger" v-if="!acc.is_active">No</b-badge>
+                            </td>
+                            <td><router-link :to="'staff/' + acc.id + ''"><i class="fas fa-info text-info"></i></router-link></td>
+                            <td><router-link :to="'staff/' + acc.id + '/edit'"><i class="fas fa-user-edit text-info"></i></router-link></td>
                         </tr>
+                        <tr v-else><td colspan="9"> No Staff to display</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -37,25 +43,17 @@
 import AccountForm from './AccountForm';
 import EditAccount from './EditAccount';
 import { formatDate } from '../../Filters/filters';
+import { mapGetters }  from 'vuex';
 
     export default {
-        data(){
-            return {
-                all_accounts: [],
-            }
+        computed:{
+            ...mapGetters({
+              staff: 'getStaff'  
+            })
         },
         components:{
             AccountForm,
             EditAccount
-        },
-        beforeCreate(){
-            this.$store.dispatch('getAccounts');
-        },
-        created(){
-            this.all_accounts = this.$store.state.accounts;
-        },
-        beforeMount(){
-            this.all_accounts = this.$store.state.accounts;
         },
         filters: {
             formatDate,

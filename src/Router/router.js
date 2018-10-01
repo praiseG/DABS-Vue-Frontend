@@ -7,12 +7,12 @@ import Appointments from '../Components/Appointments/Appointments';
 import Accounts from '../Components/Accounts/Accounts';
 import AccountInfo from '../Components/Accounts/AccountInfo';
 import EditAccount from '../Components/Accounts/EditAccount';
-import ResetPassword from '../Components/Accounts/ResetPassword';
 import Doctors from '../Components/Accounts/Doctors';
 import Patients from '../Components/Patients/Patients';
 import AppointmentDetail from '../Components/Appointments/AppointmentDetail';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
 
 Vue.use(VueRouter);
 
@@ -24,9 +24,8 @@ const routes = [
         {path: 'appointments/:id', component: AppointmentDetail},
         {path: 'staff', component: Accounts},
         {path: 'doctors', component: Doctors},
-        {path: 'accounts/:id', component: AccountInfo}, 
-        {path: 'accounts/:id/edit', component: EditAccount},
-        {path: 'accounts/:id/reset-password', component: ResetPassword},
+        {path: 'accounts/:id', alias: ['staff/:id', 'doctors/:id'], component: AccountInfo}, 
+        {path: 'accounts/:id/edit', alias: ['staff/:id/edit', 'doctors/:id/edit'], component: EditAccount},
         {path: 'patients', component: Patients},
     ],
     meta: {

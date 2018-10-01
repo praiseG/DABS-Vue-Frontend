@@ -1,13 +1,15 @@
 <template>
-    <b-card no-body>
+    <b-card no-body v-if="account">
         <b-card-header><strong>{{account.name}}</strong></b-card-header>
         <b-card-body >
-            <b-form @submit.prevent="handleSubmit">
+            <b-form @submit.prevent="handleSubmit" data-vv-scope="edit-form">
                 <b-alert v-if="submitted && formInvalid" variant="danger" show>
                     <p v-if="errors" v-for="error in errors.items" :key="error.id">{{error.msg}}</p>
                     <p v-if="formErrors">{{formErrors}}</p>
                 </b-alert>
-                <b-alert v-if="submitted && success" variant="success" show>
+                <b-alert 
+                        v-if="submitted && success" 
+                        variant="success" show dismissible @dismissed="success=''">
                     <p>{{success}}</p>
                 </b-alert>
                 <b-row>
@@ -54,27 +56,28 @@
             </b-form>
         </b-card-body>
          <b-card-body class="reset-password">
-            <b-form @submit.prevent="resetPassword">
+            <b-form @submit.prevent="resetPassword" data-vv-scope="reset-form" class="mt-3">
                 <b-alert v-if="pSubmitted && pFormInvalid" variant="danger" show>
                     <p v-if="errors" v-for="error in errors.items" :key="error.id">{{error.msg}}</p>
                     <p v-if="pFormErrors">{{pFormErrors}}</p>
                 </b-alert>
-                <b-alert v-if="pSubmitted && pSuccess" variant="success" show>
-                    <p>{{success}}</p>
+                <b-alert v-if="pSubmitted && pSuccess" variant="success" show
+                            dismissible @dismissed="pSuccess=''">
+                    <p>{{pSuccess}}</p>
                 </b-alert>
                 <b-row>
                     <b-col cols="4">
                         <b-form-group label="Password:">
-                            <b-form-input v-validate="'required'" name="password" type="password" v-model.lazy="password" placeholder="Password"/>
+                            <b-form-input type="password" v-validate="'required'" name="password" ref="password"   v-model.lazy="password" placeholder="Password"/>
                         </b-form-group>
                     </b-col>
                     <b-col cols="4">
                         <b-form-group label="Confirm Password:">
-                        <b-form-input type="password" name="confirm_password" v-validate="'required|confirmed:password'" v-model.lazy="account.confirm_password" placeholder="Confirm Password" />
+                        <b-form-input type="password" name="confirm_password" v-validate="'required|confirmed:password'" v-model.lazy="confirm_password" placeholder="Confirm Password" data-vv-as="password"/>
                         </b-form-group>
                     </b-col>
                     <b-col cols="4">
-                            <b-button class="btn-dabs mt-4" type="submit">Reset Password</b-button>
+                        <b-button class="btn-dabs mt-32" type="submit">Reset Password</b-button>
                     </b-col>
                 </b-row>
 
@@ -84,15 +87,16 @@
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex';
 import { capitalize } from '../../Filters/filters';
 export default {
     data(){
         return{
+            id: null,
             confirm_password: null,
             password: null,
             submitted: false,
-            success: false,
+            success: null,
             formInvalid: false,
             formErrors: null,
             pFormErrors: null,
@@ -101,35 +105,34 @@ export default {
             pSubmitted: false,
             roles: ['doctor','helpdesk', 'manager'],
             account: {
-                "name": null,
-                "email": null,
-                "role": null,
-                "designation": null,
-                "password": null,
-                "is_active": true,
-                "is_staff": false,
-                "is_superuser": false
+                name: null,
+                email: null,
+                role: null,
+                designation: null,
+                is_staff:false,
+                is_supruser: false,
+                is_active: true
             }
         }
+    },
+    computed:{
+        ...mapGetters([
+            'getAccount'
+        ]),
+    
     },
     filters:{
         capitalize
     },
     created(){
-        let id = this.$route.params.id;
-        console.log("id " + id);
-        id && this.$store.dispatch('getAccount', id)
-        .then(response =>{
-            console.log(response);
-            this.account = response.body;
-        },error =>{
-            console.log(error);
-        });
+        this.id = this.$route.params.id;
+        let info = this.id ? this.getAccount(this.id) : null;
+        this.account = info ? JSON.parse(JSON.stringify(info)): this.account;
     },
     methods:{
         handleSubmit(e){
             this.submitted = true;
-            this.$validator.validateAll().then(valid =>{
+            this.$validator.validateAll("edit-form").then(valid =>{
                 if(valid){
                     this.$store.dispatch('updateAccount', this.account)
                     .then(response =>{
@@ -137,7 +140,6 @@ export default {
                         this.success = response.body.message;
                     },error =>{
                         this.formInvalid = true;
-                        this.formErrors = "Error from API. check console";
                         this.formErrors = error.bodyText;
                         console.log(error);
                     });
@@ -149,10 +151,21 @@ export default {
         },
         resetPassword(e){
             this.pSubmitted = true;
-            this.$validator.validate(valid => {
+            this.$validator.validateAll("reset-form").then(valid => {
                 if(valid){
-                    this.pFormErrors = null;   
-                    this.success = "Password Reset Successful";
+                    this.pFormInvalid = false;
+                    let id = this.$route.params.id;
+                    id && this.$store.dispatch('resetPassword', {"id": id, "password": this.password})
+                    .then(resp => {
+                        this.pFormErrors = null;   
+                        this.pSuccess = "Password Reset Successful";
+                        console.log(resp);
+                    }, 
+                    error =>{
+                        this.pFormInvalid = true;
+                        this.pFormErrors = error.bodyText;
+                    })
+                    
                 }else{
                     this.pFormInvalid = true;
                 }
@@ -165,5 +178,9 @@ export default {
 <style scoped>
 .reset-password{
     border-top: 1px solid rgb(190, 187, 181);
+}
+
+.mt-32{
+    margin-top: 32px;
 }
 </style>

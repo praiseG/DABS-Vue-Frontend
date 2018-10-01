@@ -33,8 +33,7 @@ export default {
        
     },
     created(){
-        const uname = localStorage.getItem('username');
-        uname && eBus.$emit('loggedInUser', uname);
+        this.$store.dispatch('getAccounts');
     },
    
 }

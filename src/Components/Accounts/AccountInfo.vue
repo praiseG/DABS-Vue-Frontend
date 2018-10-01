@@ -25,10 +25,11 @@
                             <tr><td>Is Staff:</td><td>{{account.is_staff | capitalize}}</td></tr>
                             <tr><td>Is SuperUser:</td><td>{{account.is_superuser | capitalize}} </td></tr>
                             <tr><td>Is Active:</td><td>{{account.is_active | capitalize}}</td></tr>
-                            <tr ><td class="pt-3"><router-link :to="account.id +  '/reset-password'" class="btn btn-dabs">Reset Password</router-link><router-link :to="account.id +  '/edit'" class="btn btn-dabs ml-2">Update Info</router-link></td><td></td></tr>
+                            <tr ><td class="pt-3"><router-link :to="account.id +  '/edit'" class="btn btn-dabs ml-2">Update Info</router-link></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
+                <div v-else>No Account Data</div>
             </b-col>
         </b-row>
     </b-card>
@@ -36,22 +37,17 @@
 
 <script>
 import { formatDate, formatDateTime, capitalize } from '../../Filters/filters';
+import { mapGetters } from 'vuex';
 export default {
-    data(){
-        return {
-            account: null
-        }
+    computed:{
+       ...mapGetters([
+           'getAccount'
+       ])
     },
     created(){
         let id = this.$route.params.id;
         console.log("id " + id);
-        id && this.$store.dispatch('getAccount', id)
-        .then(response =>{
-            console.log(response);
-            this.account = response.body;
-        },error =>{
-            console.log(error);
-        });
+        this.account = id ? this.getAccount(id) : '';
     },
     filters:{
         formatDate,
