@@ -25,9 +25,9 @@
                                 <b-badge variant="success" v-if="doc.is_active">Yes</b-badge>
                                 <b-badge variant="danger" v-if="!doc.is_active">No</b-badge>
                             </td>
-                            <td><i class="fas fa-clipboard-list text-info"></i></td>
-                            <td><router-link :to="'doctors/' + doc.id + ''"><i class="fas fa-info text-info"></i></router-link></td>
-                            <td><router-link :to="'doctors/' + doc.id + '/edit'"><i class="fas fa-user-edit text-info"></i></router-link></td>
+                            <td><i class="fas fa-clipboard-list text-info" v-b-tooltip.hover  title="Appointments"></i></td>
+                            <td><router-link :to="'doctors/' + doc.id + ''"><i class="fas fa-info text-info" v-b-tooltip.hover  title="Profile"></i></router-link></td>
+                            <td><router-link :to="'doctors/' + doc.id + '/edit'"><i class="fas fa-user-edit text-info" v-b-tooltip.hover  title="Edit"></i></router-link></td>
                         </tr>
                         <tr v-else><td colspan="4">No Data in Table</td></tr>
                     </tbody>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { formatDate } from '../../Filters/filters';
+import { formatDate } from '../../Filters';
 import { mapGetters } from 'vuex';
     export default {
         computed:{

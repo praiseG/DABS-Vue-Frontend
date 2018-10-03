@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 import VueResource from 'vue-resource';
-import Router from './Router/router';
-import { store } from './Store/store';
+import Router from './Router';
+import { store } from './Store';
 import VeeValidate from 'vee-validate';
 import underscore from 'underscore';
-
 
 
 Object.defineProperty(Vue.prototype, '$_', { value: underscore });

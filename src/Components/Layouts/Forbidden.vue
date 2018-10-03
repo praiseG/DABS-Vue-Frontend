@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {  toUpperCase } from '../../Filters/filters';
+import {  toUpperCase } from '../../Filters';
 export default {
     filters:{
         toUpperCase

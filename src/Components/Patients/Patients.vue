@@ -3,7 +3,7 @@
         <PatientForm />
         <b-card class="mt-3" header="Patients">
             <div class="table-responsive">
-                <table id="accounts-tbl" aria-busy="false" class="table b-table table-striped table-hover table-bordered table-sm">
+                <table id="patientss-tbl" aria-busy="false" class="table b-table table-striped table-hover table-bordered table-sm">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -17,17 +17,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(acc, index) in accounts" :key="index">
+                        <tr v-for="(patient, index) in patients" :key="index">
                             <td>{{index + 1}}</td>
-                            <td>{{acc.name | capitalize}}</td>
-                            <td>{{acc.email}}</td>
-                            <td>{{acc.mobile}}</td>
-                            <td>{{acc.age}}</td>
-                            <td>{{acc.disability}}</td>
-                            <td>{{acc.registered_on | formatDateTime }}</td>
-                            <td><i class="fas fa-history text-info"></i></td>
-                            <td><i class="fas fa-info text-info"></i></td>
-                            <td><i class="fas fa-edit text-info"></i></td>
+                            <td>{{patient.name | capitalize}}</td>
+                            <td>{{patient.email}}</td>
+                            <td>{{patient.mobile}}</td>
+                            <td>{{patient.age}}</td>
+                            <td>{{patient.disability}}</td>
+                            <td>{{patient.registered_on | formatDateTime }}</td>
+                            <td><router-link :to="'patients/' + patient.id + ''"><i class="fas fa-info text-info" v-b-tooltip.hover  title="Profile"></i></router-link><router-link :to="'patients/' + patient.id + ''"><i class="fas fa-history text-info" v-b-tooltip.hover  title="History"></i></router-link></td>
+                            <td><router-link :to="'patients/' + patient.id + '/edit'"><i class="fas fa-user-edit text-info" v-b-tooltip.hover  title="Edit"></i></router-link></td>
                         </tr>      
                     </tbody>
                 </table>
@@ -38,23 +37,19 @@
 
 <script>
 import PatientForm from './PatientForm';
-import { formatDateTime, capitalize } from '../../Filters/filters';
+import { mapState } from 'vuex';
+import { formatDateTime, capitalize } from '../../Filters';
     export default {
-        data(){
-            return {
-                accounts: []
-            }
+        computed: {
+            ...mapState([
+                'patients'
+            ])
         },
         components:{
             PatientForm
         },
         created(){
-            this.$http.get('patients')
-            .then(response => {
-                    this.accounts = response.body;
-                }, error =>{
-                    console.log(errors);
-            })
+            this.$store.dispatch('fetchPatients');
         },
         filters:{
             formatDateTime,

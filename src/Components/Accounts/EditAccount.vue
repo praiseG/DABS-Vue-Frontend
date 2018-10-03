@@ -88,7 +88,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { capitalize } from '../../Filters/filters';
+import { capitalize } from '../../Filters';
 export default {
     data(){
         return{

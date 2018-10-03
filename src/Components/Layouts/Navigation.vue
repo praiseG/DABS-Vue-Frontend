@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { toLowerCase } from '../../Filters/filters';
+import { toLowerCase } from '../../Filters';
 export default {
     data(){
         return {

@@ -19,17 +19,17 @@
                     <tbody>
                         <tr v-if="staff" v-for="(acc, index) in staff" :key="index">
                             <td>{{index + 1}}</td>
-                            <td>{{acc.name}}</td>
+                            <td>{{acc.name | capitalize}}</td>
                             <td>{{acc.email}}</td>
                             <td>{{acc.role}}</td>
-                            <td>{{acc.designation}}</td>
+                            <td>{{acc.designation | capitalize}}</td>
                             <td>{{acc.created_at | formatDate}}</td>
                             <td>
                                 <b-badge variant="success" v-if="acc.is_active">Yes</b-badge>
                                 <b-badge variant="danger" v-if="!acc.is_active">No</b-badge>
                             </td>
-                            <td><router-link :to="'staff/' + acc.id + ''"><i class="fas fa-info text-info"></i></router-link></td>
-                            <td><router-link :to="'staff/' + acc.id + '/edit'"><i class="fas fa-user-edit text-info"></i></router-link></td>
+                            <td><router-link :to="'staff/' + acc.id + ''"><i class="fas fa-info text-info" v-b-tooltip.hover  title="Profile"></i></router-link></td>
+                            <td><router-link v-can:edit="'Account'" :to="'staff/' + acc.id + '/edit'"><i class="fas fa-user-edit text-info" v-b-tooltip.hover  title="Edit"></i></router-link></td>
                         </tr>
                         <tr v-else><td colspan="9"> No Staff to display</td></tr>
                     </tbody>
@@ -42,7 +42,7 @@
 <script>
 import AccountForm from './AccountForm';
 import EditAccount from './EditAccount';
-import { formatDate } from '../../Filters/filters';
+import { formatDate, capitalize } from '../../Filters';
 import { mapGetters }  from 'vuex';
 
     export default {
@@ -57,6 +57,7 @@ import { mapGetters }  from 'vuex';
         },
         filters: {
             formatDate,
+            capitalize
         }
     }
 </script>

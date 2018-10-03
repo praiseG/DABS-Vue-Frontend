@@ -16,7 +16,8 @@
 
 <script>
 import Navigation from './Navigation';
-import { eBus } from '../../main';
+import Acl from '../../Acl';
+
 
 export default {
     components: {
@@ -29,12 +30,10 @@ export default {
             all_patients: null
         }
     },
-    methods:{
-       
-    },
     created(){
         this.$store.dispatch('getAccounts');
     },
+    
    
 }
 </script>

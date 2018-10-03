@@ -23,6 +23,7 @@
     "vee-validate": "^2.1.0-beta.9",
     "vue": "^2.5.11",
     "vue-bootstrap-datetimepicker": "^5.0.1",
+    "vue-browser-acl": "^0.9.0",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

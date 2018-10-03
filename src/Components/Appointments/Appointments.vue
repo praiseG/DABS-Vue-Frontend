@@ -31,8 +31,8 @@
                                 <b-badge v-else-if="appt.status=='in-progress'" variant="secondary">{{appt.status | capitalize}}</b-badge>
                                 <b-badge v-else variant="info"  >{{appt.status | capitalize}}</b-badge>
                             </td>
-                            <td><i class="fas fa-info text-info"></i></td>
-                            <td><i class="fas fa-edit text-info"></i></td>
+                            <td><i class="fas fa-info text-info" v-b-tooltip.hover  title="Details"></i></td>
+                            <td><i class="fas fa-edit text-info" v-b-tooltip.hover  title="Edit"></i></td>
                         </tr>      
                     </tbody>
                 </table>
@@ -43,7 +43,8 @@
 
 <script>
 import AppointmentForm from './AppointmentForm';
-import { formatDateTime, capitalize } from '../../Filters/filters';
+import { formatDateTime, capitalize } from '../../Filters';
+
 export default {
     components: {
         AppointmentForm

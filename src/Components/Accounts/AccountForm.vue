@@ -6,7 +6,8 @@
             <p v-for="error in errors.items" :key="error.id">{{error.msg}}</p>
             <p v-if="apiErrors">{{apiErrors}}</p>
         </b-alert>
-        <b-alert v-if="submitted && success" variant="success" show>{{success}}</b-alert>
+        <b-alert v-if="submitted && success" variant="success" show
+                dismissible @dismissed="success=''">{{success}}</b-alert>
         <b-row>
             <b-col cols="4">
                 <b-form-input v-validate="'required'" name="name" type="text" v-model.lazy="account.name" placeholder="Name"/>
@@ -55,7 +56,7 @@
 <script>
 
 import FormHelper from '../Layouts/FormHelper';
-import { capitalize } from '../../Filters/filters';
+import { capitalize } from '../../Filters';
 export default {
     data(){
         return{
